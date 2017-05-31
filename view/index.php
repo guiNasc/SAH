@@ -25,23 +25,24 @@
       </div>
 
       <div class="main_">
-        <form>
+        <form action="../controller/LoginControl.php" method="POST" >
 
           <div class="form-group row">
             <div class="col-md-6">
               <label class="col-md-2 col-form-label">Email</label>
-              <input type="text" class="form-control validar" data-mensagem="Preencha o campo email.">  
+              <input type="text" class="form-control validar" data-mensagem="Preencha o campo email." name="email">  
             </div>
           </div>
 
           <div class="form-group row">
             <div class="col-md-6">
               <label class="col-md-2 col-form-label">Senha</label>
-              <input type="password" class="form-control validar" data-mensagem="Preencha o campo senha.">  
+              <input type="password" class="form-control validar" data-mensagem="Preencha o campo senha." name="senha">  
             </div>
           </div>
 
-          <button class="btn btn-success" type="button" onclick="validarFormulario()">Entrar</button>
+          <input class="btn btn-success" type="submit" name="btnLogin" value="Entrar"/>
+
           <div class="row">
             <a href="#">Ainda não sou cadastrado</a>
           </div>

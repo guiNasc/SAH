@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+if(empty($_SESSION['logged']) || !$_SESSION['logged'] ){
+  echo 'Permissao negada';
+  die();
+}
+
+$mail = $_SESSION['mail'];
+?>
 
 <!DOCTYPE html>
 <html lang="br">
@@ -24,10 +34,10 @@
       </div>
 
         <div class="alert alert-success" role="alert">
-          <strong>Usuário logado: </strong> user XYZ
+          <strong>Usuário logado: </strong> <?php echo $mail;?>
         </div>
       <div class="main_">
-        <form>
+        <form action="../controller/PerfilControl.php">
 
           <div class="form-group row">
             <div class="col-md-6">
@@ -38,7 +48,7 @@
             </div>
           </div>
 
-          <button class="btn btn-success" type="button">Acessar</button>
+          <input class="btn btn-success" type="submit" value="Acessar" name="btnAcessar"/>
           
         </form>
 
