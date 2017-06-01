@@ -1,4 +1,14 @@
+<?php
 
+session_start();
+if(empty($_SESSION['logged']) || !$_SESSION['logged'] ){
+  header("Location: ../view/index.php");
+  die();
+}
+
+$mail = $_SESSION['mail'];
+$profile = $_SESSION['profile'];
+?>
 <!DOCTYPE html>
 <html lang="br">
   <head>
@@ -14,6 +24,8 @@
     <link href="../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../lib/bootstrap-3.3.7-dist/css/jumbotron-narrow.css" rel="stylesheet">
     <link href="../css/custom.css" rel="stylesheet">
+    <script type="text/javascript" src="../lib/jquery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/utils.js"></script>
   </head>
 
@@ -25,20 +37,21 @@
       </div>
 
         <div class="alert alert-success" role="alert">
-          <strong>Usuário logado: </strong> user XYZ
-          <strong>Perfil: </strong> perfil XYZ
+          <strong>Usuário logado: </strong> <?php echo $mail?>
+          <strong>Perfil: </strong> <?php echo $profile?>
         </div>
 
             <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Visualizar</a>
+              </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#">Inserir</a>
+                <a class="nav-link" href="#">Inserir</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Editar</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Visualizar</a>
-              </li>
+              
             </ul>
 
       <div class="main_">
@@ -65,7 +78,7 @@
             </div>
             
 
-            <button class="btn btn-success" type="button" onclick="validarFormulario()">Pesquisar</button>
+            <button class="btn btn-success" type="submit" onclick="validarFormulario()">Pesquisar</button>
           
           </div>
 

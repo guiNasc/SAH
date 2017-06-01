@@ -8,14 +8,15 @@ if( isset($_POST['btnLogin'])){
 	$form_mail = $_POST['email'];
 	$form_pass = $_POST['senha'];
 
-	$mail = $dao->buscar($form_mail,$form_pass);
+	$result = $dao->buscar($form_mail,$form_pass);
 
-	if(empty($mail)){
-		header("Location: ../view/index.html");	
+	if(empty($result)){
+		header("Location: ../view/index.php");	
 	}else{
 		session_start();
 		$_SESSION['logged'] = true;
-		$_SESSION['mail'] = $mail;
+		$_SESSION['mail'] = $result->mail;
+		$_SESSION['profile'] = $result->profile;
 		header("Location: ../view/seleciona_perfil.php");
 	} 
 }

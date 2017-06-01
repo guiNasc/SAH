@@ -17,8 +17,7 @@ class LoginDAO extends BaseDAO{
             $stm->bindValue(++$count, $p_pass);
 
             if($stm->execute()) {
-         		$dados = $stm->fetch(PDO::FETCH_OBJ);
-                return $dados->mail;
+         		return $stm->fetch(PDO::FETCH_OBJ);
             }
 
         } catch(PDOException $e) {

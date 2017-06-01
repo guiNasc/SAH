@@ -2,7 +2,7 @@
 
 session_start();
 if(empty($_SESSION['logged']) || !$_SESSION['logged'] ){
-  echo 'Permissao negada';
+  header("Location: ../view/index.php");
   die();
 }
 
@@ -37,7 +37,7 @@ $mail = $_SESSION['mail'];
           <strong>Usuário logado: </strong> <?php echo $mail;?>
         </div>
       <div class="main_">
-        <form action="../controller/PerfilControl.php">
+        <form action="../controller/PerfilControl.php" method="POST">
 
           <div class="form-group row">
             <div class="col-md-6">
