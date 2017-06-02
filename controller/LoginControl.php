@@ -9,8 +9,8 @@ if( isset($_POST['btnLogin'])){
 	$form_pass = $_POST['senha'];
 
 	$result = $dao->buscar($form_mail,$form_pass);
-
-	if(empty($result)){
+	echo $result;
+	/*if(empty($result)){
 		header("Location: ../view/index.php");	
 	}else{
 		session_start();
@@ -18,7 +18,7 @@ if( isset($_POST['btnLogin'])){
 		$_SESSION['mail'] = $result->mail;
 		$_SESSION['profile'] = $result->profile;
 		header("Location: ../view/seleciona_perfil.php");
-	} 
+	} */
 }
 
 
