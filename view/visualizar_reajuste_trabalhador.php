@@ -8,6 +8,7 @@ if(empty($_SESSION['logged']) || !$_SESSION['logged'] ){
 
 $mail = $_SESSION['mail'];
 $profile = $_SESSION['profile'];
+$userId = $_SESSION['userId'];
 ?>
 <!DOCTYPE html>
 <html lang="br">
@@ -31,9 +32,28 @@ $profile = $_SESSION['profile'];
 <script type="text/javascript">
   
 function pesquisar(){
+  document.getElementById('tableBody').innerHTML = "Nenhum registro encontrado.";
   if(validarFormulario()){
-    $.post("teste.php", "campo1=dadoEmCasa", function( data ) {
-      console.log(data);
+    var url = "../controller/TimeRecordControl.php";
+    var dtIni = $('#dtIni').val();
+    var dtFim = $('#dtFim').val();
+    var motive = $('#Justificativa').val();
+    var params =  "dtIni="+dtIni+"&dtFim="+dtFim+"&motive="+motive+"&userId=<?php echo $userId?>";
+    //var params =  "dtIni=05/05/2017&dtFim=06/05/2017&motive="+motive+"&userId=<?php echo $userId?>";
+    var tableBody = "";
+    $.post(url, params, function( data ) {
+      var json = JSON.parse(data);
+      $.each(json, function(a,b){
+        tableBody= tableBody +"<tr>"+
+                  "<td>"+b.data+"</td>"+
+                  "<td>"+b.timeIn+"</td>"+
+                  "<td>"+b.timeOut+"</td>"+
+                  "<td>"+b.total+"</td>  "+
+                  "<td>"+b.motive+"</td>"+
+                  "<td>X</td>"+
+                "</tr>";
+      });
+      document.getElementById('tableBody').innerHTML = tableBody;
     });
   }
 }
@@ -75,24 +95,21 @@ function pesquisar(){
             <div class="row paddingB_">
               <label class="col-md-2 label-control">Data Inicial</label>
               <input type="text" class="form-control validar" onkeypress="mascararCampo(this, '##/##/####')" maxlength="10"
-              data-mensagem="Preencha a data inicial.">
+              data-mensagem="Preencha a data inicial." id="dtIni">
   
               <label class="label-control">Data Final</label>
               <input type="text" class="form-control validar" onkeypress="mascararCampo(this, '##/##/####')" maxlength="10"
-                data-mensagem="Preencha a data final.">            
+                data-mensagem="Preencha a data final." id="dtFim">            
             </div>
             
             <div class="row">
               <label class="col-md-2 label-control">Justificativa</label>
-              <select class="custom-select form-control">
+              <select class="custom-select form-control" id="Justificativa">
                 <option selected>Versionamento</option>
                 <option>Capacitação</option>
               </select>  
             </div>
             
-
-            <!-- <button class="btn btn-success" type="submit" onclick="validarFormulario()">Pesquisar</button>
-           -->
            <button class="btn btn-success" type="button" onclick="pesquisar()">Pesquisar</button>
           
           </div>
@@ -100,45 +117,20 @@ function pesquisar(){
 
           <div class="customTable_">
             <table class="table">
-  <thead class="thead-inverse">
-    <tr>
-      <th>Data</th>
-      <th>Entrada</th>
-      <th>Saída</th>
-      <th>Total horas</th>
-      <th>Justificativa</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>21/02/2017</td>
-      <td>08:30</td>
-      <td>12:30</td>
-      <td>4</td>  
-      <td>Versionamento</td>
-      <td>X</td>
-    </tr>
-    <tr>
-      <td>21/02/2017</td>
-      <td>08:30</td>
-      <td>12:30</td>
-      <td>4</td>
-      <td>Versionamento</td>
-      <td>X</td>
-    </tr>
-    <tr>
-      <td>21/02/2017</td>
-      <td>08:30</td>
-      <td>12:30</td>
-      <td>4</td>
-      <td>Versionamento</td>
-      <td>X</td>
-    </tr>
-  </tbody>
-</table>
+              <thead class="thead-inverse">
+                <tr>
+                  <th>Data</th>
+                  <th>Entrada</th>
+                  <th>Saída</th>
+                  <th>Total horas</th>
+                  <th>Justificativa</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody">
+              </tbody>
+            </table>
           </div>
-
           
         </form>
 

@@ -4,6 +4,7 @@ class Usuario{
 	private $mail;
 	private $pass;
 	private $profile;
+	private $id;
 
 
 	public function setMail($mail){
@@ -25,6 +26,10 @@ class Usuario{
 	}
 	public function getProfile(){
 		return $this->profile;
+	}
+
+	public function getId(){
+		return $this->id;
 	}
 
 }

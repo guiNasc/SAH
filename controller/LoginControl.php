@@ -16,6 +16,7 @@ if( isset($_POST['btnLogin'])){
 		$_SESSION['logged'] = true;
 		$_SESSION['mail'] = $result->getMail();
 		$_SESSION['profile'] = $result->getProfile();
+		$_SESSION['userId'] = $result->getId();
 		header("Location: ../view/seleciona_perfil.php");
 	} 
 }
