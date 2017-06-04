@@ -26,7 +26,20 @@ $profile = $_SESSION['profile'];
     <link href="../css/custom.css" rel="stylesheet">
     <script type="text/javascript" src="../lib/jquery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/utils.js"></script>
+     <script type="text/javascript" src="../js/utils.js"></script>
+ 
+<script type="text/javascript">
+  
+function pesquisar(){
+  if(validarFormulario()){
+    $.post("teste.php", "campo1=dadoEmCasa", function( data ) {
+      console.log(data);
+    });
+  }
+}
+</script>
+
+
   </head>
 
   <body>
@@ -73,12 +86,14 @@ $profile = $_SESSION['profile'];
               <label class="col-md-2 label-control">Justificativa</label>
               <select class="custom-select form-control">
                 <option selected>Versionamento</option>
-                <option selected>Capacitação</option>
+                <option>Capacitação</option>
               </select>  
             </div>
             
 
-            <button class="btn btn-success" type="submit" onclick="validarFormulario()">Pesquisar</button>
+            <!-- <button class="btn btn-success" type="submit" onclick="validarFormulario()">Pesquisar</button>
+           -->
+           <button class="btn btn-success" type="button" onclick="pesquisar()">Pesquisar</button>
           
           </div>
 

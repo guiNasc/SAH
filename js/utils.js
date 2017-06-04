@@ -4,15 +4,8 @@
 */
 
 document.addEventListener("DOMContentLoaded", function(event) { 
-	document.forms[0].onsubmit = function validarFormulario(){
-		var campos = document.getElementsByClassName('validar');
-		for(var i=0; i< campos.length; i++){
-			if(campos[i].value == ""){
-				alert(campos[i].getAttribute('data-mensagem'));
-				return false;
-			}
-		}
-		return true;
+	document.forms[0].onsubmit = function(){
+		return validarFormulario();
 	};
 });
 /*
@@ -29,4 +22,13 @@ function mascararCampo(t, mascara){
 	}
 }
 
-     
+function validarFormulario(){
+		var campos = document.getElementsByClassName('validar');
+		for(var i=0; i< campos.length; i++){
+			if(campos[i].value == ""){
+				alert(campos[i].getAttribute('data-mensagem'));
+				return false;
+			}
+		}
+		return true;
+	};  

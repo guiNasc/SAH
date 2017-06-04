@@ -1,5 +1,6 @@
 <?php
 include_once "BaseDAO.php";
+include_once "../model/Usuario.php";
 
 
 class LoginDAO extends BaseDAO{ 
@@ -17,7 +18,9 @@ class LoginDAO extends BaseDAO{
             $stm->bindValue(++$count, $p_pass);
 
             if($stm->execute()) {
-         		return $stm->fetch(PDO::FETCH_OBJ);
+                $user = new Usuario();
+                $user = $stm->fetchObject("Usuario"); 
+                return $user;
             }
 
         } catch(PDOException $e) {
