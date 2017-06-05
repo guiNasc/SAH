@@ -27,37 +27,36 @@ $userId = $_SESSION['userId'];
     <link href="../css/custom.css" rel="stylesheet">
     <script type="text/javascript" src="../lib/jquery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-     <script type="text/javascript" src="../js/utils.js"></script>
+    <script type="text/javascript" src="../js/utils.js"></script>
  
-<script type="text/javascript">
-  
-function pesquisar(){
-  document.getElementById('tableBody').innerHTML = "Nenhum registro encontrado.";
-  if(validarFormulario()){
-    var url = "../controller/TimeRecordControl.php";
-    var dtIni = $('#dtIni').val();
-    var dtFim = $('#dtFim').val();
-    var motive = $('#Justificativa').val();
-    var params =  "dtIni="+dtIni+"&dtFim="+dtFim+"&motive="+motive+"&userId=<?php echo $userId?>";
-    //var params =  "dtIni=05/05/2017&dtFim=06/05/2017&motive="+motive+"&userId=<?php echo $userId?>";
-    var tableBody = "";
-    $.post(url, params, function( data ) {
-      var json = JSON.parse(data);
-      $.each(json, function(a,b){
-        tableBody= tableBody +"<tr>"+
-                  "<td>"+b.data+"</td>"+
-                  "<td>"+b.timeIn+"</td>"+
-                  "<td>"+b.timeOut+"</td>"+
-                  "<td>"+b.total+"</td>  "+
-                  "<td>"+b.motive+"</td>"+
-                  "<td>X</td>"+
-                "</tr>";
-      });
-      document.getElementById('tableBody').innerHTML = tableBody;
-    });
-  }
-}
-</script>
+    <script type="text/javascript">
+      
+    function pesquisar(){
+      document.getElementById('tableBody').innerHTML = "Nenhum registro encontrado.";
+      if(validarFormulario()){
+        var url = "../controller/TimeRecordControl.php";
+        var dtIni = $('#dtIni').val();
+        var dtFim = $('#dtFim').val();
+        var motive = $('#Justificativa').val();
+        var params =  "dtIni="+dtIni+"&dtFim="+dtFim+"&motive="+motive+"&userId=<?php echo $userId?>&metodo=pesquisar";
+        var tableBody = "";
+        $.post(url, params, function( data ) {
+          var json = JSON.parse(data);
+          $.each(json, function(a,b){
+            tableBody= tableBody +"<tr>"+
+                      "<td>"+b.data+"</td>"+
+                      "<td>"+b.timeIn+"</td>"+
+                      "<td>"+b.timeOut+"</td>"+
+                      "<td>"+b.total+"</td>  "+
+                      "<td>"+b.motive+"</td>"+
+                      "<td>X</td>"+
+                    "</tr>";
+          });
+          document.getElementById('tableBody').innerHTML = tableBody;
+        });
+      }
+    }
+    </script>
 
 
   </head>
@@ -106,7 +105,7 @@ function pesquisar(){
               <label class="col-md-2 label-control">Justificativa</label>
               <select class="custom-select form-control" id="Justificativa">
                 <option selected>Versionamento</option>
-                <option>Capacitação</option>
+                <option>Capacitacao</option>
               </select>  
             </div>
             

@@ -3,16 +3,33 @@ include_once "../dao/TimeRecordDAO.php";
 
 	$dao = new TimeRecordDAO;	
 	
-	//var_dump($_POST);
+	$metodo = $_POST['metodo'];
 
-	$dtIni = $_POST['dtIni'];
-	$dtFim = $_POST['dtFim'];
-	$motive = $_POST['motive'];
-	$userId = $_POST['userId'];
+	if($metodo == "pesquisar"){
+		$dtIni = $_POST['dtIni'];
+		$dtFim = $_POST['dtFim'];
+		$motive = $_POST['motive'];
+		$userId = $_POST['userId'];
 
 
-	$result = $dao->buscar($dtIni,$dtFim,$motive,$userId);
+		$result = $dao->buscar($dtIni,$dtFim,$motive,$userId);
 
- 	//echo $dtIni." - ".$dtFim." - ".$motive." - ".$userId;
- 	echo json_encode($result);
+	 	echo json_encode($result);	
+	}
+
+	if($metodo == "inserir"){
+		 $data 		= $_POST['data'];
+         $hrIni 	= $_POST['hrIni'];
+         $hrFim 	= $_POST['hrFim'];
+         $userId 	= $_POST['userId'];
+         $motive 	= $_POST['motive'];
+
+         $result = $dao->inserir($data,$hrIni,$hrFim,$userId,$motive);
+         echo $result;
+	}
+
+
+
+
+	
 ?>
