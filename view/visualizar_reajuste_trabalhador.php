@@ -25,12 +25,14 @@ $userId = $_SESSION['userId'];
     <link href="../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../lib/bootstrap-3.3.7-dist/css/jumbotron-narrow.css" rel="stylesheet">
     <link href="../css/custom.css" rel="stylesheet">
+    <link href="../lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
     <script type="text/javascript" src="../lib/jquery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/utils.js"></script>
  
     <script type="text/javascript">
-      
+
     function pesquisar(){
       document.getElementById('tableBody').innerHTML = "Nenhum registro encontrado.";
       if(validarFormulario()){
@@ -49,7 +51,7 @@ $userId = $_SESSION['userId'];
                       "<td>"+b.timeOut+"</td>"+
                       "<td>"+b.total+"</td>  "+
                       "<td>"+b.motive+"</td>"+
-                      "<td>X</td>"+
+                      "<td><a href='editar_reajuste_trabalhador.php?id="+b.id+"' class='fa fa-edit' title='Editar'></a><button type='button' class='fa fa-window-close' onclick='excluir("+b.id+")' title='Excluir'/></td>"+
                     "</tr>";
           });
           document.getElementById('tableBody').innerHTML = tableBody;
@@ -78,12 +80,8 @@ $userId = $_SESSION['userId'];
                 <a class="nav-link" href="#">Visualizar</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Inserir</a>
+                <a class="nav-link" href="inserir_reajuste_trabalhador.php">Inserir</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Editar</a>
-              </li>
-              
             </ul>
 
       <div class="main_">

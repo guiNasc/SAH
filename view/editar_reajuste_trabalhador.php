@@ -9,6 +9,12 @@ if(empty($_SESSION['logged']) || !$_SESSION['logged'] ){
 $mail = $_SESSION['mail'];
 $profile = $_SESSION['profile'];
 $userId = $_SESSION['userId'];
+$recordId = $_GET['id'];
+
+include_once "../dao/TimeRecordDAO.php";
+$dao = new TimeRecordDAO; 
+$result = $dao->buscarById($recordId);
+
 ?>
 <!DOCTYPE html>
 <html lang="br">
@@ -30,7 +36,7 @@ $userId = $_SESSION['userId'];
     <script type="text/javascript" src="../js/utils.js"></script>
 
     <script type="text/javascript">
-      function salvar(){
+      function atualizar(){
         if(validarFormulario()){
           var url = "../controller/TimeRecordControl.php";
 
@@ -38,10 +44,10 @@ $userId = $_SESSION['userId'];
           var hrIni = $('#hrIni').val();
           var hrFim = $('#hrFim').val();
           var motive = $('#Justificativa').val();
-          var params =  "data="+dtData+"&hrIni="+hrIni+"&hrFim="+hrFim+"&motive="+motive+"&userId=<?php echo $userId?>&metodo=inserir";
+          var params =  "data="+dtData+"&hrIni="+hrIni+"&hrFim="+hrFim+"&motive="+motive+"&userId=<?php echo $userId?>&metodo=editar&recordId=<?php echo $recordId?>";
           
           $.post(url, params, function( data ) {
-            console.info(data);
+            alert(data);
           }).fail(function(){
             console.info(data);
           });
@@ -69,7 +75,7 @@ $userId = $_SESSION['userId'];
                 <a class="nav-link" href="visualizar_reajuste_trabalhador.php">Visualizar</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#">Inserir</a>
+                <a class="nav-link" href="inserir_reajuste_trabalhador.php">Inserir</a>
               </li>
             </ul>
 
@@ -80,7 +86,7 @@ $userId = $_SESSION['userId'];
             <div class="row paddingB_">
               <label class="col-md-3 label-control">Data</label>
               <input type="text" class="form-control validar" onkeypress="mascararCampo(this,'##/##/####')"
-                data-mensagem="Preencha a data." maxlength="10" id="dtData">
+                data-mensagem="Preencha a data." maxlength="10" id="dtData" value="<?php echo $result[0]['data'];?>">
   
               <label class="label-control">Justificativa</label>
               <select class="custom-select form-control" id="Justificativa">
@@ -92,17 +98,16 @@ $userId = $_SESSION['userId'];
             <div class="row">
               <label class="col-md-3 label-control">Hora entrada</label>
               <input type="text" class="form-control validar" onkeypress="mascararCampo(this,'##:##')" maxlength="5"
-                data-mensagem="Preencha a hora de entrada." id="hrIni">
+                data-mensagem="Preencha a hora de entrada." id="hrIni" value="<?php echo $result[0]['timeIn'];?>">
               <label class="label-control">Hora saída</label>
               <input type="text" class="form-control validar" onkeypress="mascararCampo(this,'##:##')" maxlength="5"
-                data-mensagem="Preencha a hora de saída." id="hrFim">  
+                data-mensagem="Preencha a hora de saída." id="hrFim" value="<?php echo $result[0]['timeOut'];?>">  
             </div>
             
 
-            <button class="btn btn-success" type="button" onclick="salvar()">Salvar</button>
+            <button class="btn btn-success" type="button" onclick="atualizar()">Atualizar</button>
           
           </div>
-
         </form>
 
       </div>

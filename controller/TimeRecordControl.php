@@ -28,8 +28,16 @@ include_once "../dao/TimeRecordDAO.php";
          echo $result;
 	}
 
+	if($metodo == "editar"){
+		 $data 		= $_POST['data'];
+         $hrIni 	= $_POST['hrIni'];
+         $hrFim 	= $_POST['hrFim'];
+         $userId 	= $_POST['userId'];
+         $motive 	= $_POST['motive'];
+         $recordId 	= $_POST['recordId'];
 
-
-
+         $result = $dao->editar($data,$hrIni,$hrFim,$userId,$motive,$recordId);
+         echo $result;
+	}
 	
 ?>
