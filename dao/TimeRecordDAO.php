@@ -72,6 +72,22 @@ class TimeRecordDAO extends BaseDAO{
         }
     }
 
+    public function excluir($p_id){
+    	try { 
+    		$ps = $this->conexao->prepare("DELETE FROM time_record WHERE id = ?");
+            
+      
+            $cont = 0;
+            $ps->bindValue(++$cont, $p_id);
+	        if($ps->execute()) {
+	            echo "Dados excluídos com sucesso! <br/>";
+            }
+            
+        } catch(PDOException $e) {
+                echo "Erro: ".$e->getMessage();
+        }
+    }
+
 
     public function inserir($p_data,$p_hrIni,$p_hrFim,$p_userId,$p_motive) {
 

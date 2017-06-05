@@ -39,5 +39,10 @@ include_once "../dao/TimeRecordDAO.php";
          $result = $dao->editar($data,$hrIni,$hrFim,$userId,$motive,$recordId);
          echo $result;
 	}
+	if($metodo == "excluir"){
+		$recordId 		= $_POST['recordId'];
+		$result = $dao->excluir($recordId);
+         echo $result;
+	}
 	
 ?>

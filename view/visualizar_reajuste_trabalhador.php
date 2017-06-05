@@ -58,6 +58,16 @@ $userId = $_SESSION['userId'];
         });
       }
     }
+
+    function excluir(id){
+      if(confirm("Deseja mesmo excluir o registro ?")){
+        var url = "../controller/TimeRecordControl.php";
+        $.post(url, "metodo=excluir&recordId="+id, function( data ) {
+          $('#btnPesquisar').click();
+        });
+    }
+  }
+
     </script>
 
 
@@ -107,7 +117,7 @@ $userId = $_SESSION['userId'];
               </select>  
             </div>
             
-           <button class="btn btn-success" type="button" onclick="pesquisar()">Pesquisar</button>
+           <button class="btn btn-success" type="button" onclick="pesquisar()" id="btnPesquisar">Pesquisar</button>
           
           </div>
 
